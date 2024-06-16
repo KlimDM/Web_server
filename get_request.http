@@ -1,0 +1,39 @@
+### simple GET
+GET localhost:80/
+Accept: text/html
+
+### GET request with parameter
+GET https://ijhttp-examples.jetbrains.com/get?show_env=1
+Accept: application/json
+
+### GET request with environment variables
+// Tip: putting scheme:// + host to {{host}} allows switching schemes between different environments
+GET {{host}}/get?show_env={{show_env}}
+Accept: application/json
+
+### GET request with disabled redirects
+# @no-redirect
+GET https://ijhttp-examples.jetbrains.com/status/301
+
+### GET request without cookies
+# @no-cookie-jar
+GET https://ijhttp-examples.jetbrains.com/cookies
+
+### GET request with cookie passed through headers
+GET https://ijhttp-examples.jetbrains.com/cookies
+Cookie: theme=darcula; last_searched_location=IJburg
+
+### GET request with dynamic variables
+GET https://ijhttp-examples.jetbrains.com/anything?id={{$random.uuid}}&ts={{$timestamp}}
+
+### Define own filename for saved response file
+GET https://ijhttp-examples.jetbrains.com/get
+
+// file will be named my-response.json instead of default name
+>> {{$historyFolder}}/my-response.json
+
+### Force own filename for saved response file
+GET https://ijhttp-examples.jetbrains.com/get
+
+// If there is already a `my-forced-response.json`, HTTP Client will override it
+>>! {{$historyFolder}}/my-forced-response.json
